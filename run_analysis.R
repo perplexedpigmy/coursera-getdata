@@ -20,21 +20,21 @@ getFile("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HA
         "power_consumption.zip",
         unzip = TRUE)
 
-# Load required packages. Install if necessary
-for (pkg in c("data.table", "reshape2")) {
-  if (!is.element(pkg, .packages())) { install.packages(pkg) }
-  library(pkg, character.only = TRUE)
-}
-
-# 
+# ###############################################################
 # Renames columns to be a bit less ugly 
 # I personally dont' see much wrong in the nameing convention, 
 # except the parenthesis. 
+# 
+# Argument 
+#   A vector of column names 
+# 
+# Return value 
+#   Beautified column names
 beautify <- function(columns) {
   sapply(columns, function(col) { gsub("\\()", "", col)})
 }
   
-# 
+# ############################################################### 
 #  Combine all 3 information parts into 1 table
 #   - X file (Actual observation)
 #   - Y file (Activity)
@@ -44,7 +44,10 @@ beautify <- function(columns) {
 #     type - The type of information to process 
 #            Possible values: test | train
 # 
-#  Dependencies on parent environment (to avoid longer than necessary function signature)
+#  Return value
+#    A data.frame with with 3 additional columns(type, subject, activity)
+# 
+#  Dependencies on parent closure (to avoid longer than necessary function signature)
 #     activity      - A vector of activity labels (Order corresponds to activity value)
 #     col.class     - A vector of classes (length must be equal to number of observational columns )
 #                     Allows to filter out unwanted columns
@@ -63,27 +66,23 @@ construct <- function(type) {
   obs <- subset(obs, select=c('subject', 'activity', 'type' , col.names))
 }
 
-# Read the activity and feature metadata 
+# ###############################################################
+#  Main
 activity <- read.table("data/UCI HAR Dataset/activity_labels.txt", colClasses = c("NULL", "character"))[,1]
 feature  <- read.table("data/UCI HAR Dataset/features.txt", colClasses = c("NULL", "character"))[,1]
 
-# Deduce the columns of interest. and their  colClasses
-# Take only mean and standard-deviation variables as instructed
-# and NOT variable such as meanFreq
+# Deduce columns with mean and std and not meanFreq
 feature.cols <- grep("(mean|std)\\()", feature)
 col.class    <- rep("NULL", length(feature))
 col.class[feature.cols] <- "numeric"
 col.names  <- beautify(feature[feature.cols])
 
-# Step 1 throuh 4: Merged train & test
+# Step 1 throuh 4: Merged train & test with properly named columns 
 merged <- rbind(construct("train"), construct("test"))
 
 # Step 5: tidy dataset averaged per activity/subject 
 per.activity.subject <- aggregate(merged[c('type', col.names)], 
-                                  list(activity=merged$activity,
-                                       subject=merged$subject),
-                                  function(x) { # Avoid averging the type
-                                    ifelse (class(x) == 'character', x, mean(x)) 
-                                    })
+                                  list(activity=merged$activity, subject=merged$subject),
+                                  function(x) {  ifelse (class(x) == 'character', x, mean(x))  })
 
 write.table(per.activity.subject, "tidy.txt", row.names = FALSE, quote = FALSE)

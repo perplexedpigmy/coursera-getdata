@@ -33,7 +33,7 @@ Beside being disjoint, exiting in multiple files and split to test and training 
 The analysis follows these steps
 * Read the feature and activity labels (files activity_labels.txt and features.txt)
 * Identify the columns containing std() or mean() string 
-* Call the function **construct** to build a data.frame for each of the data sets (_train_ and _test_) from it's disjoint 3 parts (*files X_<type>.txt*, *Y_<type>.txt*, *subject_<type>.txt*), only for the columns of interest (recieved in previous step)
+* Call the function **construct** to build a data.frame for each of the data sets (_train_ and _test_) from it's disjoint 3 parts (*files X_\<type>.txt*, *Y_\<type>.txt*, *subject_\<type>.txt*), only for the columns of interest (recieved in previous step)
 * Combine the two data.frames created for _test_ and _train_. By now we have a tidy data.frame
 * use **aggregate** to group all rows by subject and activity with a mean() function. yielding the average for each variable per activity and subject.
 

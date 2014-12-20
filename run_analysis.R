@@ -20,20 +20,6 @@ getFile("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HA
         "power_consumption.zip",
         unzip = TRUE)
 
-# ###############################################################
-# Renames columns to be a bit less ugly 
-# I personally dont' see much wrong in the nameing convention, 
-# except the parenthesis. 
-# 
-# Argument 
-#   A vector of column names 
-# 
-# Return value 
-#   Beautified column names
-beautify <- function(columns) {
-  sapply(columns, function(col) { gsub("\\()", "", col)})
-}
-  
 # ############################################################### 
 #  Combine all 3 information parts into 1 table
 #   - X file (Actual observation)
@@ -75,7 +61,9 @@ feature  <- read.table("./UCI HAR Dataset/features.txt", colClasses = c("NULL", 
 feature.cols <- grep("(mean|std)\\()", feature)
 col.class    <- rep("NULL", length(feature))
 col.class[feature.cols] <- "numeric"
-col.names  <- beautify(feature[feature.cols])
+
+# Column names quite explanatory. I only remove the () from the name
+col.names  <- sapply(feature[feature.cols], function(col) { gsub("\\()", "", col)})
 
 # Step 1 throuh 4: Merged train & test with properly named columns 
 merged <- rbind(construct("train"), construct("test"))

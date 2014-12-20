@@ -16,7 +16,7 @@
 
 source('common.R') # Common external data retrival file
 getFile("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip",
-        "data",
+        ".",
         "power_consumption.zip",
         unzip = TRUE)
 
@@ -53,9 +53,9 @@ beautify <- function(columns) {
 #                     Allows to filter out unwanted columns
 #     col.names     - A vector of feature columns we are interested in
 construct <- function(type) {
-  obs <- read.table(file.path("data/UCI HAR Dataset", type, paste0("X_", type, ".txt")), colClasses = col.class)
-  act <- read.table(file.path("data/UCI HAR Dataset", type, paste0("Y_", type, ".txt")))
-  sbj <- read.table(file.path("data/UCI HAR Dataset", type, paste0("subject_", type, ".txt")))
+  obs <- read.table(file.path("./UCI HAR Dataset", type, paste0("X_", type, ".txt")), colClasses = col.class)
+  act <- read.table(file.path("./UCI HAR Dataset", type, paste0("Y_", type, ".txt")))
+  sbj <- read.table(file.path("./UCI HAR Dataset", type, paste0("subject_", type, ".txt")))
   names(obs) <- col.names
 
   obs["subject"]  <- sbj
@@ -68,8 +68,8 @@ construct <- function(type) {
 
 # ###############################################################
 #  Main
-activity <- read.table("data/UCI HAR Dataset/activity_labels.txt", colClasses = c("NULL", "character"))[,1]
-feature  <- read.table("data/UCI HAR Dataset/features.txt", colClasses = c("NULL", "character"))[,1]
+activity <- read.table("./UCI HAR Dataset/activity_labels.txt", colClasses = c("NULL", "character"))[,1]
+feature  <- read.table("./UCI HAR Dataset/features.txt", colClasses = c("NULL", "character"))[,1]
 
 # Deduce columns with mean and std and not meanFreq
 feature.cols <- grep("(mean|std)\\()", feature)

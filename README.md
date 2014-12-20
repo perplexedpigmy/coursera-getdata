@@ -47,12 +47,8 @@ The function recives a type, either _train_ or _test_ and it constructs a data.f
 
 ## Running the script
 ### Dependencies
-The script relies on external script **Common.R** to download the external data and unzip it. 
-If you want to remove that external dependencies and disable this code, you will need to make sure that the unzipped external data
-is located in a directory called **data** in the current **getwd()** directory. so if you run this command
-> list.files("data")
-
-The result will contain the directory **UCI HAR Dataset** and all the file structure described in **The Data** Section.
+The script relies on external script **common.R** to download the external data and unzip it. 
+If you already have **UCI HAR Dataset** directory and all related files, in the current **getwd()** directory than you don't need it and can remove this part of the code (lines 17-21).
 
 ### Output
 The script will create in local directory a **tidy.txt** file as requested by the 5th point of the assingment 

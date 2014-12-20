@@ -57,12 +57,11 @@ construct <- function(type) {
 activity <- read.table("./UCI HAR Dataset/activity_labels.txt", colClasses = c("NULL", "character"))[,1]
 feature  <- read.table("./UCI HAR Dataset/features.txt", colClasses = c("NULL", "character"))[,1]
 
-# Deduce columns with mean and std and not meanFreq
+# Deduce columns with mean() and std() ONLY. Create a col.class mask to filter out unecessary columns
 feature.cols <- grep("(mean|std)\\()", feature)
-col.class    <- rep("NULL", length(feature))
-col.class[feature.cols] <- "numeric"
+col.class    <- sapply(seq_along(feature), function(index) { ifelse(index %in% feature.cols, "numeric", "NULL")} )
 
-# Column names quite explanatory. I only remove the () from the name
+# Column names quite explanatory. I only remove the () from the name, which I dislike.
 col.names  <- sapply(feature[feature.cols], function(col) { gsub("\\()", "", col)})
 
 # Step 1 throuh 4: Merged train & test with properly named columns 

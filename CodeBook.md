@@ -10,10 +10,38 @@ The data as captured by accelerometer and gyroscope sensors of a Samsung smartph
 ### Post processing data
 The data is first cleaned and normalized and bounded within [-1,1], using the [median filter](http://en.wikipedia.org/wiki/Median_filter) and and a 3<sup>rd</sup> order low pass [Butterworth filter](http://en.wikipedia.org/wiki/Butterworth_filter) with a corner frequency of 20 Hz.
 
-Subsequently, the acceleration signal was then separated into body and gravity acceleration signals components. and the following additional variables were derived:
-- The body linear acceleration and angular velocity were derived in time to obtain Jerk signals
-- The magnitude of the above signals were calculated using the [Euclidean norm](http://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm)
-- Some frequency domain variables were synthesized via the [Fast Fourier Transform (FFT)](http://en.wikipedia.org/wiki/Fast_Fourier_transform)
+Subsequently, the acceleration signal was then separated into body and gravity acceleration signals components(`tBodyAcc-XYZ` and `tGravityAcc-XYZ`). and the following additional variables were derived:
+- The body linear acceleration and angular velocity were derived in time to obtain Jerk signal (`tBodyAccJerk-XYZ` and `tBodyGyroJerk-XYZ`)
+- The magnitude of the above signals were calculated using the [Euclidean norm](http://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm) (`tBodyAccMag`, `tGravityAccMag`, `tBodyAccJerkMag`, `tBodyGyroMag`, `tBodyGyroJerkMag`)
+- Some frequency domain variables were synthesized via the [Fast Fourier Transform (FFT)](http://en.wikipedia.org/wiki/Fast_Fourier_transform)(`fBodyAcc-XYZ`, `fBodyAccJerk-XYZ`, `fBodyGyro-XYZ`, `fBodyAccJerkMag`, `fBodyGyroMag`, `fBodyGyroJerkMag`)
+
+The set of variables that were estimated from these signals are:  
+ 
+- `mean()` Mean value 
+- `std()` Standard deviation 
+- `mad()` Median absolute deviation  
+- `max()` Largest value in array 
+- `min()` Smallest value in array 
+- `sma()` Signal magnitude area 
+- `energy()` Energy measure. Sum of the squares divided by the number of values.  
+- `iqr()` Interquartile range  
+- `entropy()` Signal entropy 
+- `arCoeff()` Autorregresion coefficients with Burg order equal to 4 
+- `correlation()` correlation coefficient between two signals 
+- `maxInds()` index of the frequency component with largest magnitude 
+- `meanFreq()` Weighted average of the frequency components to obtain a mean frequency 
+- `skewness()` skewness of the frequency domain signal  
+- `kurtosis()` kurtosis of the frequency domain signal  
+- `bandsEnergy()` Energy of a frequency interval within the 64 bins of the FFT of each window. 
+- `angle()` Angle between to vectors. 
+ 
+Additional vectors obtained by averaging the signals in a signal window sample. These are used on the angle() variable: 
+ 
+`gravityMean` 
+`tBodyAccMean` 
+`tBodyAccJerkMean` 
+`tBodyGyroMean` 
+`tBodyGyroJerkMean`
 
 ### Stored Data structure
 Description of the stored Input data can be found in the [README file](https://github.com/perplexedpigmy/coursera-getdata/blob/master/README.md#the-data)

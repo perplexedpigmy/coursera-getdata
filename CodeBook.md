@@ -40,7 +40,7 @@ There are 3 category columns
 #### Sensor Derived data
 
 There are 66 sensor derivded variables, that are ordered in the following table by their description 
-and the type of the descrition ([Time domain](http://en.wikipedia.org/wiki/Time_domain), or [Frequency domain](http://en.wikipedia.org/wiki/Frequency_domain))
+and the type of the descrition ([Time domain](http://en.wikipedia.org/wiki/Time_domain), or [Frequency domain](http://en.wikipedia.org/wiki/Frequency_domain)). They are of type `numeric` and their values are normalized to value range -1 upto 1.
 
 **Notes:**
 * -XYZ is used to denote 3-axial signals in the X, Y and Z directions, i.e variable described as tBodyAcc-mean-XYZ, is actually a description of 3 variables tBodyAcc-mean-X, tBodyAcc-mean-Y and tBodyAcc-Z.

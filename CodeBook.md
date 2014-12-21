@@ -8,7 +8,7 @@ There are 2 data layers Raw sensory data and post-processed data
 The data as captured by accelerometer and gyroscope sensors of a Samsung smartphone at a constant speed of 50Hz by 30 different individuals (subjects) aged from 19 to 48 as they perform activities of daily living (ADL). 
 
 ### Post processing data
-The data is first cleaned and normalized to ranges -1 up to 1, using the [median filter](http://en.wikipedia.org/wiki/Median_filter) and and a 3<sup>rd</sup> order low pass [Butterworth filter](http://en.wikipedia.org/wiki/Butterworth_filter) with a corner frequency of 20 Hz.
+The data is first cleaned and normalized and bounded within [-1,1], using the [median filter](http://en.wikipedia.org/wiki/Median_filter) and and a 3<sup>rd</sup> order low pass [Butterworth filter](http://en.wikipedia.org/wiki/Butterworth_filter) with a corner frequency of 20 Hz.
 
 Subsequently, the acceleration signal was then separated into body and gravity acceleration signals components. and the following additional variables were derived:
 - The body linear acceleration and angular velocity were derived in time to obtain Jerk signals
@@ -40,7 +40,7 @@ There are 3 category columns
 #### Sensor Derived data
 
 There are 66 sensor derivded variables, that are ordered in the following table by their description 
-and the type of the descrition ([Time domain](http://en.wikipedia.org/wiki/Time_domain), or [Frequency domain](http://en.wikipedia.org/wiki/Frequency_domain)). They are of type `numeric` and their values are normalized to value range -1 upto 1.
+and the type of the descrition ([Time domain](http://en.wikipedia.org/wiki/Time_domain), or [Frequency domain](http://en.wikipedia.org/wiki/Frequency_domain)). They are of type `numeric` and their values are normalized and bounded within [-1,1]
 
    Description                       |  Time domain variable           | Frequency domain variable
 :-----------------------------------:|:--------------------------------|:--------------------------

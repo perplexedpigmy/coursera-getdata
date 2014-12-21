@@ -62,7 +62,7 @@ feature.cols <- grep("(mean|std)\\()", feature)
 col.class    <- sapply(seq_along(feature), function(index) { ifelse(index %in% feature.cols, "numeric", "NULL")} )
 
 # Column names quite explanatory. I only remove the () from the name, which I dislike.
-col.names  <- sapply(feature[feature.cols], function(col) { gsub("\\()", "", col)})
+col.names <- gsub("BodyBody", "Body", gsub("\\()", "", col.names))
 
 # Step 1 throuh 4: Merged train & test with properly named columns 
 merged <- rbind(construct("train"), construct("test"))

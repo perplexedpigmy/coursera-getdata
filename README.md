@@ -95,8 +95,8 @@ The script will create in local directory a **tidy.txt** file as requested by th
 
 
 ## Comments
-* The order of the instructions was deemed unimportant and was not strictly followed. efficiency and goal trump blind obidence, 
+* The order of the instructions was deemed unimportant and was not strictly followed. efficiency and goal trump blind obidence :) 
 especailly when the grading rubricks do not require it.
-* The assignement clearly asked for *standard deviation* and *mean* of each of the variables, meanFreqs was considered as not required
+* The assignement clearly asked for `standard deviation` and `mean` of each of the variables, meanFreqs and other variables containing mean in them are ignored.
 
 

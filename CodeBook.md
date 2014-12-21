@@ -104,5 +104,5 @@ Body Angular Acceleration Magnitude  |  tBodyGyroJerkMag-mean          |  fBodyG
 The data is output to a file named `tidy.txt` in the current working directory.
 An example code to read it in the R langauge is
 ````R
-> View(read.table('tidy.txt', header = TRUE)
+> View(read.table('tidy.txt', header = TRUE))
 ````

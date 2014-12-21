@@ -25,17 +25,17 @@ The transformation analysis is detailed in the [README file](https://github.com/
 
 ### Tidy Data description
 
-There are two column types categories and sensor derived (Derived from the observation of the sensors)
+There are 69 columns divided into 2 column types **tegories** and **sensor derived** (Derived from the observation of the sensors)
 
 #### Category columns
 
 There are 3 category columns 
 
   Name       |   Class    |   Values                                                                       | Comment
-------------:|:----------:|:------------------------------------------------------------------------------:|:----------
+:-----------:|:----------:|:------------------------------------------------------------------------------:|:----------
 **type**     | `character`| `train`, `test`                                                                | Origin of observation
-**activity** | `character | `standing`,`sitting`,`laying`,`walking`,`walking_downstairs`,`walking_upstairs`|`  
-**subject**  | `integer   | 1-30                                                                           | Subject id 
+**activity** | `character`| `standing`,`sitting`,`laying`,`walking`,`walking_downstairs`,`walking_upstairs`|  
+**subject**  | `integer`  | 1-30                                                                           | Subject id 
 
 #### Sensor Derived data
 
@@ -44,21 +44,22 @@ and the type of the descrition ([Time domain](http://en.wikipedia.org/wiki/Time_
 
 **Notes:**
 * -XYZ is used to denote 3-axial signals in the X, Y and Z directions, i.e variable described as tBodyAcc-mean-XYZ, is actually a description of 3 variables tBodyAcc-mean-X, tBodyAcc-mean-Y and tBodyAcc-Z.
-* The value of a variable whose name contain `mean` string is the average of all observationss for a specific subject and activity pair.
+* The value of a variable whose name contain `mean` string is the average of all observations for a specific subject and activity pair.
 * The value of a variable whose name contain `std` string is the standard deviation of all observations for a specific subject and activity pair.
-* There are 180 observation rows in the tidy dataset
+* There are 180 observation rows in the tidy dataset.
+* prefixes 'f' and 't' denote frequency domain and time domain repectively.
 
    Description                       |  Time domain variable           | Frequency domain variable
-:-----------------------------------:|:-------------------------------:|:-------------------------:
-Body Acceleration	             |  tBodyAcc-mean-XYZ              |  fBodyAcc-mean-XYZ 
+:-----------------------------------:|:--------------------------------|:--------------------------
+Body Acceleration	                   |  tBodyAcc-mean-XYZ              |  fBodyAcc-mean-XYZ 
                                      |  tBodyAcc-std-XYZ               |  fBodyAcc-std-XYZ
-Gravity Acceleration	             |  tGravityAcc-mean-XYZ           |  
+Gravity Acceleration	               |  tGravityAcc-mean-XYZ           |  
                                      |  tGravityAcc-std-XYZ            |
 Body Acceleration Jerk               |  tBodyAccJerk-mean-XYZ          |  fBodyAccJerk-mean-XYZ
                                      |  tBodyAccJerk-std-XYZ           |  fBodyAccJerk-std-XYZ
 Body Angular Speed                   |  tBodyGyro-mean-XYZ             |  fBodyGyro-mean-XYZ
                                      |  tBodyGyro-std-XYZ              |  fBodyGyro-std-XYZ
-Body Angular Acceleration	     |  tBodyGyroJerk-mean-XYZ         |  
+Body Angular Acceleration	           |  tBodyGyroJerk-mean-XYZ         |  
                                      |  tBodyGyroJerk-std-XYZ          |  
 Body Acceleration Magnitude          |  tBodyAcckMag-mean              |  fBodyAccMag-mean
                                      |  tBodyAcckMag-std               |  fBodyAccMag-std
@@ -73,7 +74,7 @@ Body Angular Acceleration Magnitude  |  tBodyGyroJerkMag-mean          |  fBodyG
 
 
 ### Stored data structure
-The data is output to a file named tidy.txt in the current working directory.
+The data is output to a file named `tidy.txt` in the current working directory.
 An example code to read it in the R langauge is
 ````R
 > View(read.table('tidy.txt', header = TRUE)

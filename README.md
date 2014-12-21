@@ -73,7 +73,7 @@ The resulting data.frame columns are composed of all `mean()` and `std()` variab
 ````
 
 ### Variable names transformation
-I personally find the variable naming convention quite adquat being both concise and predictble, and no major changes takes place except for the removal of the parethensis which I find peculiar in a column name, and the obvious typo of repeating Body twice in Body variables.
+I personally find the variable naming convention quite adquat being both concise and predictable, and no major changes takes place except for the removal of the parethensis which I find peculiar in a column name, and the obvious typo of repeating Body twice in several Body related variables.
 ````R
 65: col.names <- gsub("BodyBody", "Body", gsub("\\()", "", col.names))
 ````

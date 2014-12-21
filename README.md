@@ -90,6 +90,9 @@ The script relies on external script **common.R** to download the external data 
 ````
 If you already have **UCI HAR Dataset** directory and all related files, in the current **getwd()** directory than you don't need it and can remove this part of the code.
 
+### How to run
+Just sourcing the script either via the `source` function or cutting and paste the relevant code should do the trick providing that all dependencies exist.
+
 ### Output
 The script will create in local directory a **tidy.txt** file as requested by the 5th point of the assingment 
 

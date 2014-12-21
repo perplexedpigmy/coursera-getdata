@@ -30,7 +30,7 @@ The data is disjoint and exist in multiple files, as described by the following 
 Beside being disjoint, exiting in multiple files and split to test and training there is not much else that is fudenentaly wrong.
 
 ## Analysis 
-The analysis follows these steps
+The analysis is composed of these steps
 * Read the feature and activity labels (only the label column)
 ````R
 57: activity <- read.table("./UCI HAR Dataset/activity_labels.txt", colClasses = c("NULL", "character"))[,1]
@@ -50,7 +50,7 @@ The analysis follows these steps
 72:                                   list(activity=merged$activity, subject=merged$subject),
 73:                                   function(x) { ifelse (class(x) == 'character', x, mean(x))  })
 ````
-The function in **aggregate** is intended to avoid averaging the _type_ column(values: _train_ or _test_) which is of _character_ class.
+The function in `aggregate` is intended to avoid averaging the _type_ column(values: _train_ or _test_) which is of _character_ class.
 
 ### The `construct` function
 The **construct** function capitalize on the fact that the two separated datasets for _train_ and _test_ share the same directory structure as well as file naming, and thusly both dataset can enjoy the same processing.

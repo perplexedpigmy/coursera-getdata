@@ -20,6 +20,8 @@ getFile("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HA
         "power_consumption.zip",
         unzip = TRUE)
 
+depends.on('data.table')
+
 # ############################################################### 
 #  Combine all 3 information parts into 1 table
 #   - X file (Actual observation)
@@ -39,17 +41,17 @@ getFile("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HA
 #                     Allows to filter out unwanted columns
 #     col.names     - A vector of feature columns we are interested in
 construct <- function(type) {
-  obs <- read.table(file.path("./UCI HAR Dataset", type, paste0("X_", type, ".txt")), colClasses = col.class)
-  act <- read.table(file.path("./UCI HAR Dataset", type, paste0("Y_", type, ".txt")))
-  sbj <- read.table(file.path("./UCI HAR Dataset", type, paste0("subject_", type, ".txt")))
-  names(obs) <- col.names
-
-  obs["type"]     <- type
-  obs["activity"] <- sapply(act$V1, function(act.no) { tolower(activity[act.no]) })
-  obs["subject"]  <- sbj
-
+  obs <- data.table(read.table(file.path("./UCI HAR Dataset", type, paste0("X_", type, ".txt")), colClasses = col.class))
+  act <- scan(file.path("./UCI HAR Dataset", type, paste0("Y_", type, ".txt")), quiet = T)
+  sbj <- scan(file.path("./UCI HAR Dataset", type, paste0("subject_", type, ".txt")), quiet = T)
+  setnames(obs, names(obs),col.names)
+  
+  obs[, c("subject", "activity", "type") := list(
+          sbj, 
+          sapply(act, function(act.no) { tolower(activity[act.no]) }), 
+          type)]
   # Re-order the data.frame to have the introduced columns first
-  obs <- subset(obs, select=c('type', 'activity', 'subject' , col.names))
+  setcolorder(obs, c('subject', 'activity', 'type', col.names) )
 }
 
 # ###############################################################
@@ -65,10 +67,10 @@ col.class      <- sapply(feature, function(ft) { unname(ifelse(ft %in% select.fe
 col.names <- gsub("BodyBody", "Body", gsub("\\()", "",select.feature))
 
 # Step 1 throuh 4: Merged train & test with properly named columns 
-merged <- rbind(construct("train"), construct("test"))
+merged <- rbindlist(list(construct("train"), construct("test")))
 
 # Step 5: tidy dataset averaged per activity/subject 
-per.activity.subject <- 
-  aggregate(merged[col.names], list(type=merged$type, activity=merged$activity, subject=merged$subject), mean) 
+setkey(merged, subject, activity)
+per.activity.subject <- merged[, lapply(.SD, mean), by = c("subject", "activity", "type")]
 
 write.table(per.activity.subject, "tidy.txt", row.names = FALSE, quote = FALSE)

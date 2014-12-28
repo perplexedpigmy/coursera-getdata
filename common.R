@@ -51,3 +51,30 @@ getFile <- function(url, dir, name, unzip=FALSE, quiet = TRUE) {
         if (unzip) unzip(full.path, overwrite = T, exdir=dir)
     }   
 }
+
+# Unloads all user load libraries
+.unload.all <- function() {
+    pkgs <- names(sessionInfo()$otherPkgs)
+    if (length(pkgs) > 0) {
+      lapply(paste0('package:', pkgs),
+             detach, character.only = TRUE, unload = TRUE, force = TRUE)
+    }
+    invisible()
+}
+
+# Unload all environment variables
+# prefixed with dot to not be removed from environemnt 
+.clc <- function() {
+  rm(list = ls(.GlobalEnv), envir = .GlobalEnv)
+}
+
+#  First installs if required and than loads all depended libraries
+#  Args:
+#     pkg - a vector of library names
+depends.on <- function(pkg) {
+  sapply(pkg, function(p) {
+      if (!is.element(pkg, .packages(all.available = TRUE))) { print ("Install"); install.packages(pkg) }
+      suppressMessages(library(pkg, character.only = TRUE))
+    })
+  invisible()
+}

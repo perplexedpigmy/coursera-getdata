@@ -53,7 +53,7 @@ The transformation analysis is detailed in the [README file](https://github.com/
 
 ### Tidy Data description
 
-There are 69 columns divided into 2 column types **tegories** and **sensor derived** (Derived from the observation of the sensors)
+There are 69 columns divided into 2 column types **categories** and **sensor derived** (Derived from the observation of the sensors)
 
 #### Category columns
 

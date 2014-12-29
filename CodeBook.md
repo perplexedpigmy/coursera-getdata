@@ -68,13 +68,13 @@ There are 3 category columns
 #### Sensor Derived data
 
 There are 66 sensor derivded variables, that are ordered in the following table by their description 
-and the type of the descrition ([Time domain](http://en.wikipedia.org/wiki/Time_domain), or [Frequency domain](http://en.wikipedia.org/wiki/Frequency_domain)). They are of type `numeric` and their values are normalized and bounded within [-1,1]
+and the data domain  ([Time domain](http://en.wikipedia.org/wiki/Time_domain), or [Frequency domain](http://en.wikipedia.org/wiki/Frequency_domain)). They are all of type `numeric` and their values are normalized and bounded within [-1,1]
 
    Description                       |  Time domain variable           | Frequency domain variable
 :-----------------------------------:|:--------------------------------|:--------------------------
 Body Acceleration	                   |  tBodyAcc-mean-XYZ              |  fBodyAcc-mean-XYZ 
                                      |  tBodyAcc-std-XYZ               |  fBodyAcc-std-XYZ
-Gravity Acceleration	               |  tGravityAcc-mean-XYZ           |  
+Gravity Acceleration	                |  tGravityAcc-mean-XYZ           |  
                                      |  tGravityAcc-std-XYZ            |
 Body Acceleration Jerk               |  tBodyAccJerk-mean-XYZ          |  fBodyAccJerk-mean-XYZ
                                      |  tBodyAccJerk-std-XYZ           |  fBodyAccJerk-std-XYZ
@@ -86,7 +86,7 @@ Body Acceleration Magnitude          |  tBodyAcckMag-mean              |  fBodyA
                                      |  tBodyAcckMag-std               |  fBodyAccMag-std
 Gravity Acceleration Magnitude       |  tGravityAccMag-mean            |  
                                      |  tGravityAccMag-std             |
-Body Acceleration Jerk Magnitude     |	tBodyAccJerkMag-mean           |  fBodyAccJerkMag-mean
+Body Acceleration Jerk Magnitude     |	tBodyAccJerkMag-mean            |  fBodyAccJerkMag-mean
                                      |  tBodyAccJerkMag-std            |  fBodyAccJerkMag-std
 Body Angular Speed Magnitude         |  tBodyGyroMag-mean              |  fBodyGyroMag-mean
                                      |  tBodyGyroMag-std               |  fBodyGyroMag-std
@@ -95,8 +95,8 @@ Body Angular Acceleration Magnitude  |  tBodyGyroJerkMag-mean          |  fBodyG
 
 **Notes:**
 * -XYZ is used to denote 3-axial signals in the X, Y and Z directions, i.e variable described as tBodyAcc-mean-XYZ, is actually a description of 3 variables tBodyAcc-mean-X, tBodyAcc-mean-Y and tBodyAcc-Z.
-* The value of a variable whose name contain `mean` string is the average of all observations for a specific subject and activity pair.
-* The value of a variable whose name contain `std` string is the standard deviation of all observations for a specific subject and activity pair.
+* The value of a variable whose name contain `mean` string is the average of all the mean observations for a specific subject, activity pair.
+* The value of a variable whose name contain `std` string is the average of standard deviation of all observations for a specific subject, activity pair.
 * There are 180 observation rows in the tidy dataset.
 * prefixes 'f' and 't' denote frequency domain and time domain repectively.
 
